@@ -14,6 +14,7 @@ import {Html5Qrcode} from "html5-qrcode"
 export class ProductListComponent implements OnInit {
 
   searchField = new FormControl('');
+  cameraId: any;
 
   constructor(private readonly businessService: BusinessService) { }
 
@@ -34,11 +35,34 @@ export class ProductListComponent implements OnInit {
   scanQr() {
     Html5Qrcode.getCameras().then(devices => {
       if (devices && devices.length) {
-        var cameraId = devices[0].id;
+        this.cameraId = devices[0].id;
       }
     }).catch(err => {
       console.log(err);
     });
+
+    const html5QrCode = new Html5Qrcode(/* element id */ "reader");
+    html5QrCode.start(
+      this.cameraId,
+      {
+        fps: 10,    // Optional, frame per seconds for qr code scanning
+        qrbox: { width: 250, height: 250 }  // Optional, if you want bounded box UI
+      },
+      (decodedText, decodedResult) => {
+        console.log(`Code matched = ${decodedText}`, decodedResult);
+        alert(`Code matched = ${decodedText}`+ '  => ' + decodedResult);
+
+      },
+      (errorMessage) => {
+        // parse error, ignore it.
+      })
+      .catch((err) => {
+        // Start failed, handle it.
+      });
+
+
+
+
     /*const html5QrCode = new Html5Qrcode(/!* element id *!/ "reader");
 
     const fileinput = document.getElementById('qr-input-file');
