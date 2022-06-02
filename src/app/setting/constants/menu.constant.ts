@@ -1,4 +1,11 @@
 export const menuConst = {
   clean: '',
-  productList: 'Product-List'
+  productList: {
+    path: 'Product-List',
+    fullPath: '/Product-List'
+  },
+  cartproduct: {
+    path:'Carrito',
+    fullPath: '/Carrito'
+  }
 }

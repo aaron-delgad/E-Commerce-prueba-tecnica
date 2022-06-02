@@ -13,7 +13,7 @@
     <label for="inputField" class="scannerLabel bg--primary-light fw--500 fz--lg c--white px-4 py-3 br--1">Scanear</label>
   </div>
 
-  <a class="mt-3 ml-4" routerLink="/order" matBadge="{{cartProduct.length}}" matBadgeColor="warn">
+  <a class="mt-3 ml-4" (click)="goCart()" matBadge="{{cartProduct.length}}" matBadgeColor="warn">
     <mat-icon >shopping_cart</mat-icon>
   </a>
 

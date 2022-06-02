@@ -1,0 +1,10 @@
+<div class="container">
+  <h1 class="c--primary fw--700">Carrito de Compras</h1>
+
+  <mat-selection-list #shoes [multiple]="false">
+    <mat-list-option *ngFor="let cartProduct of cartProducts" [value]="cartProduct.id">
+      {{cartProduct.name}}
+    </mat-list-option>
+  </mat-selection-list>
+
+</div>

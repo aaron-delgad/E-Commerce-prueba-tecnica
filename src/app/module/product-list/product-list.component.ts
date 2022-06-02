@@ -5,6 +5,9 @@ import {FormControl} from "@angular/forms";
 import {debounceTime } from 'rxjs/operators';
 import {Html5Qrcode} from "html5-qrcode"
 import {Product} from './../../shared/model/base/product';
+import {Router} from "@angular/router";
+import {menuConst} from "../../setting/constants/menu.constant";
+import {CartService} from "../../shared/service/cart.service";
 
 @Component({
   selector: 'com-product-list',
@@ -18,7 +21,9 @@ export class ProductListComponent implements OnInit {
   html5QrCode: any;
   cartProduct: Product[] = [];
 
-  constructor(private readonly businessService: BusinessService) { }
+  constructor(private readonly businessService: BusinessService,
+              private readonly router: Router,
+              private readonly cartService: CartService) { }
 
   displayedColumns: string[] = ['name', 'sku', 'price', 'description','image', 'carrito'];
   dataSource = new MatTableDataSource<Product>();
@@ -67,6 +72,11 @@ export class ProductListComponent implements OnInit {
 
   addCart(product: Product) {
     this.cartProduct.push(product);
+    this.cartService.addProduct(product);
+  }
+
+  goCart() {
+    this.router.navigate([menuConst.cartproduct.fullPath])
   }
 
 }
