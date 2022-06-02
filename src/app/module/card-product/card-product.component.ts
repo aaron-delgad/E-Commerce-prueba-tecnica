@@ -15,42 +15,26 @@ export class CardProductComponent implements OnInit {
   send: number = 6;
   total: number = 0;
 
-  cartProducts: any[] = [
-
-    /*{
-      id: '1',
-      name: 'Trolardy 2. Trolardy y el misterio de Tutankarbón',
-      sku: 9786124461156,
-      price: 89.900000000000005684341886080801486968994140625,
-      description: 'Trolardy 2. Trolardy y el misterio de Tutankarbón',
-      image: 'https://chanchitoy.pruebasgt.com/wp-content/uploads/2022/02/portada_trolardy-2-trolardy-y-el-misterio-de-tutankarbon_trolerotutos-y-hardy_202111291055-196x300.jpg'
-    },
-    {
-      id: '2',
-      name: "Los Compas y La Entidad.EXE",
-      sku: 9786124461132,
-      price: 79.9899999999999948840923025272786617279052734375,
-      description: "Los Compas y La Entidad.EXE",
-      image: "https://chanchitoy.pruebasgt.com/wp-content/uploads/2021/11/los-compas-y-la-entidadexe-196x300.jpg"
-    },
-    {
-      id: '3',
-      name: "Trolardy y el pan dorado",
-      sku: 9786124461088,
-      price: 59.99000000000000198951966012828052043914794921875,
-      description: "Trolardy y el pan dorado",
-      image: "https://chanchitoy.pruebasgt.com/wp-content/uploads/2021/10/331553_portada_trolardy-y-el-pan-dorado_trolerotutos-y-hardy_202012230945-195x300.jpg"
-    }*/
-  ];
+  cartProducts: any[] = [];
   form: FormGroup;
 
-  constructor(private readonly cartService: CartService) {  this.formBuild();}
+  constructor(private readonly cartService: CartService) {  }
 
   ngOnInit(): void {
     this.cartService.myCart$.subscribe(produ => {
       this.cartProducts = produ;
       console.log(this.cartProducts);
+      this.calcularTotal();
     });
+  }
+
+  calcularTotal() {
+    this.subtotal = this.cartProducts.reduce(function(totalActual, Product){
+      return (Product.price * Product.cant) + totalActual;
+    }, 0);
+    console.log(this.subtotal);
+    this.total = this.subtotal + this.send;
+    this.formBuild();
   }
 
   formBuild(){
@@ -63,16 +47,28 @@ export class CardProductComponent implements OnInit {
     })
   }
 
-  CalculateOrder() {
-    const costoTotal = this.cartProducts.reduce(function(totalActual, Product){
-      return Product.price + totalActual;
-    }, 0);
-    console.log(costoTotal);
-
+  calculateOrder(productID: number) {
+    this.cartProducts = this.cartProducts.map(p =>
+      p.sku === productID
+        ? { ...p, cant: this.form.value.cantidad }
+        : p
+    );
+  console.log(this.form.value.cantidad)
   }
 
   tobuy() {
 
+  }
+
+  delete(productID: number) {
+    this.cartProducts = this.cartProducts.filter(function(dato){
+      if(dato.sku == productID){
+        return false;
+      }else{
+        return true;
+      }
+    });
+    this.calcularTotal();
   }
 
 }

@@ -21,12 +21,12 @@
                 <form [formGroup]="form">
                   <mat-form-field appearance="outline">
                   <mat-label>N° Unidades</mat-label>
-                  <input formControlName="cantidad" type="number" matInput  >
+                  <input formControlName="cantidad" type="number" matInput (change)="calculateOrder(cartProduct.sku)" >
                   </mat-form-field>
                 </form>
               </div>
               <div class="mt-3" mat-line>
-                <button mat-stroked-button color="primary">Eliminar</button>
+                <button mat-stroked-button color="primary" (click)="delete(cartProduct.sku)">Eliminar</button>
               </div>
             </div>
 

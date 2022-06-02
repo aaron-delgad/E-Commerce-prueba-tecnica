@@ -33,7 +33,6 @@ export class ProductListComponent implements OnInit {
         .pipe(debounceTime(300))
         .subscribe(resp => {
           this.businessService.getProduct(resp).subscribe(res => {
-            console.log(res);
             this.dataSource.connect().next(res.data);
           });
         });

@@ -6,6 +6,7 @@ export class Product {
   price: number;
   description: string;
   image: string;
+  cant: number;
 
   public static createObject(obj: any): Product {
     const object = new Product();
@@ -15,7 +16,7 @@ export class Product {
     object.price = obj.price ? obj.price : null;
     object.description = obj.description ? obj.description : '';
     object.image = obj.image ? obj.image : '';
-
+    object.cant = obj.cant ? obj.cant : 1;
     return object;
   }
 
