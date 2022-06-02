@@ -15,6 +15,7 @@ export class ProductListComponent implements OnInit {
 
   searchField = new FormControl('');
   cameraId: any;
+  html5QrCode: any;
 
   constructor(private readonly businessService: BusinessService) { }
 
@@ -33,62 +34,41 @@ export class ProductListComponent implements OnInit {
   }
 
   scanQr() {
-    alert('ingrese');
-
+      console.log('ingrese');
 
     Html5Qrcode.getCameras().then(devices => {
       if (devices && devices.length) {
         this.cameraId = devices[0].id;
-        console.log('camera');
-        console.log(this.cameraId);
 
-
-        const html5QrCode = new Html5Qrcode(/* element id */ "reader");
+        this.html5QrCode = new Html5Qrcode("reader");
         console.log('pase');
-        html5QrCode.start(
+        this.html5QrCode.start(
           this.cameraId,
           {
-            fps: 10,    // Optional, frame per seconds for qr code scanning
-            qrbox: { width: 250, height: 250 }  // Optional, if you want bounded box UI
+            fps: 10,
+            qrbox: { width: 250, height: 250 }
           },
           (decodedText, decodedResult) => {
-            console.log(`Code matched = ${decodedText}`, decodedResult);
-            alert(`Code matched = ${decodedText}`+ '  => ' + decodedResult);
-
+            this.searchField.setValue(decodedText);
           },
           (errorMessage) => {
-            // parse error, ignore it.
+            console.log(errorMessage);
           })
           .catch((err) => {
-            // Start failed, handle it.
+            console.log(err);
           });
-
-
       }
     }).catch(err => {
       console.log(err);
     });
+  }
 
-
-
-
-
-
-    /*const html5QrCode = new Html5Qrcode(/!* element id *!/ "reader");
-
-    const fileinput = document.getElementById('qr-input-file');
-    fileinput.addEventListener('change', e => {
-
-      /!*const imageFile = e.target.files[0];*!/
-
-      html5QrCode.scanFile(imageFile, true)
-        .then(decodedText => {
-          console.log(decodedText);
-        })
-        .catch(err => {
-          console.log(`Error scanning file. Reason: ${err}`)
-        });
-    });*/
+  stopScan() {
+    this.html5QrCode.stop().then((ignore) => {
+      console.log('detenido');
+    }).catch((err) => {
+      console.log(err);
+    });
   }
 
 }
