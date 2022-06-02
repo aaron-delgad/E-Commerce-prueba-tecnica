@@ -33,32 +33,43 @@ export class ProductListComponent implements OnInit {
   }
 
   scanQr() {
+    alert('ingrese');
+
+
     Html5Qrcode.getCameras().then(devices => {
       if (devices && devices.length) {
         this.cameraId = devices[0].id;
+        console.log('camera');
+        console.log(this.cameraId);
+
+
+        const html5QrCode = new Html5Qrcode(/* element id */ "reader");
+        console.log('pase');
+        html5QrCode.start(
+          this.cameraId,
+          {
+            fps: 10,    // Optional, frame per seconds for qr code scanning
+            qrbox: { width: 250, height: 250 }  // Optional, if you want bounded box UI
+          },
+          (decodedText, decodedResult) => {
+            console.log(`Code matched = ${decodedText}`, decodedResult);
+            alert(`Code matched = ${decodedText}`+ '  => ' + decodedResult);
+
+          },
+          (errorMessage) => {
+            // parse error, ignore it.
+          })
+          .catch((err) => {
+            // Start failed, handle it.
+          });
+
+
       }
     }).catch(err => {
       console.log(err);
     });
 
-    const html5QrCode = new Html5Qrcode(/* element id */ "reader");
-    html5QrCode.start(
-      this.cameraId,
-      {
-        fps: 10,    // Optional, frame per seconds for qr code scanning
-        qrbox: { width: 250, height: 250 }  // Optional, if you want bounded box UI
-      },
-      (decodedText, decodedResult) => {
-        console.log(`Code matched = ${decodedText}`, decodedResult);
-        alert(`Code matched = ${decodedText}`+ '  => ' + decodedResult);
 
-      },
-      (errorMessage) => {
-        // parse error, ignore it.
-      })
-      .catch((err) => {
-        // Start failed, handle it.
-      });
 
 
 
