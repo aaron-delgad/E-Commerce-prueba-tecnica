@@ -10,10 +10,14 @@ import {FormGroup, FormControl, Validators} from "@angular/forms";
 })
 export class CardProductComponent implements OnInit {
 
-  cantidad = new FormControl('', [Validators.required]);
 
-  cartProducts: Product[] = [
-    {
+  subtotal: number =0;
+  send: number = 6;
+  total: number = 0;
+
+  cartProducts: any[] = [
+
+    /*{
       id: '1',
       name: 'Trolardy 2. Trolardy y el misterio de Tutankarbón',
       sku: 9786124461156,
@@ -36,27 +40,39 @@ export class CardProductComponent implements OnInit {
       price: 59.99000000000000198951966012828052043914794921875,
       description: "Trolardy y el pan dorado",
       image: "https://chanchitoy.pruebasgt.com/wp-content/uploads/2021/10/331553_portada_trolardy-y-el-pan-dorado_trolerotutos-y-hardy_202012230945-195x300.jpg"
-    }
+    }*/
   ];
   form: FormGroup;
 
-  constructor(private readonly cartService: CartService) { this.formBuild();}
+  constructor(private readonly cartService: CartService) {  this.formBuild();}
 
   ngOnInit(): void {
-    this.cantidad.setValue('1');
-    /*this.cartService.myCart$.subscribe(produ => {
+    this.cartService.myCart$.subscribe(produ => {
       this.cartProducts = produ;
       console.log(this.cartProducts);
-    });*/
+    });
   }
 
   formBuild(){
     this.form = new FormGroup({
       name: new FormControl('', [Validators.required]),
-      subtotal: new FormControl('', [Validators.required]),
-      send: new FormControl('', [Validators.required]),
-      total: new FormControl('', [Validators.required])
+      cantidad: new FormControl('1', [Validators.required]),
+      subtotal: new FormControl(this.subtotal, [Validators.required]),
+      send: new FormControl(this.send, [Validators.required]),
+      total: new FormControl(this.total, [Validators.required])
     })
+  }
+
+  CalculateOrder() {
+    const costoTotal = this.cartProducts.reduce(function(totalActual, Product){
+      return Product.price + totalActual;
+    }, 0);
+    console.log(costoTotal);
+
+  }
+
+  tobuy() {
+
   }
 
 }

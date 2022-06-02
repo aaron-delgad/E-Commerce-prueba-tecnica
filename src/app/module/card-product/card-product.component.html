@@ -10,16 +10,21 @@
           <mat-divider></mat-divider>
 
             <div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3">
-              <div mat-line><img class="br--6" style="width: 70px; height: 90px" [src]="cartProduct.image" alt="fondo"></div>
+              <div mat-line><img class="br--6" style="width: 70px; height: 90px"
+                                 [src]="cartProduct.image" alt="fondo"></div>
             </div>
             <div class="col-9 col-sm-9 col-md-9 col-lg-9 col-xl-9">
               <div class="mt-3 c--primary" mat-line>{{cartProduct.name}}</div>
               <div class="mt-3 c--warning fz--xl" mat-line>{{cartProduct.price}}</div>
               <div class="mt-3 c--primary" mat-line>{{cartProduct.description}}</div>
-              <div class="mt-3" mat-line><mat-form-field appearance="outline">
-                <mat-label>N° Unidades</mat-label>
-                <input [formControl]="cantidad" type="number" matInput >
-              </mat-form-field></div>
+              <div class="mt-3" mat-line>
+                <form [formGroup]="form">
+                  <mat-form-field appearance="outline">
+                  <mat-label>N° Unidades</mat-label>
+                  <input formControlName="cantidad" type="number" matInput  >
+                  </mat-form-field>
+                </form>
+              </div>
               <div class="mt-3" mat-line>
                 <button mat-stroked-button color="primary">Eliminar</button>
               </div>
@@ -31,7 +36,7 @@
 
     </div>
     <div class="col-4 col-sm-4 col-md-4 col-lg-4 col-xl-4">
-      
+
       <mat-card class="px-5 py-5">
         <mat-card-header>
           <mat-card-title class="c--warning fz--xxl">Resumen de Pedido</mat-card-title>
@@ -42,28 +47,29 @@
 
             <mat-form-field class="w--100" appearance="standard">
               <mat-label class="c--primary fz--md fw--500">Nombre Cliente</mat-label>
-              <input matInput placeholder="ingrese su nombre">
+              <input matInput formControlName="name" placeholder="ingrese su nombre">
             </mat-form-field>
 
             <mat-form-field class="w--100" appearance="standard">
               <mat-label class="c--primary fz--md fw--500">Sub Total</mat-label>
-              <input matInput >
+              <input matInput formControlName="subtotal">
             </mat-form-field>
 
             <mat-form-field class="w--100" appearance="standard">
               <mat-label class="c--primary fz--md fw--500">Envío</mat-label>
-              <input matInput >
+              <input matInput formControlName="send">
             </mat-form-field>
 
             <mat-form-field class="w--100" appearance="standard">
               <mat-label class="c--primary fz--md fw--500">total</mat-label>
-              <input matInput >
+              <input matInput formControlName="total">
             </mat-form-field>
 
           </form>
         </mat-card-content>
         <mat-card-actions class="text--center">
-          <button mat-flat-button color="warn" class="py-2 px-4 fz--xl">Procesar Compra</button>
+          <button mat-stroked-button color="primary" class="mb-4" (click)="CalculateOrder()">Calcular Pedido</button>
+          <button mat-flat-button color="warn" class="py-2 px-4 fz--xl" (click)="tobuy()">Procesar Compra</button>
         </mat-card-actions>
       </mat-card>
 
