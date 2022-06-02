@@ -3,4 +3,7 @@
 }
 .scannerLabel {
   cursor: pointer;
+  :hover {
+    background-color: #003a70;
+  }
 }
