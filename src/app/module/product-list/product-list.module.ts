@@ -30,7 +30,7 @@ import {MatBadgeModule} from '@angular/material/badge';
     MatCardModule,
     MatFormFieldModule,
     MatTooltipModule,
-    MatBadgeModule
+    MatBadgeModule,
   ]
 })
 export class ProductListModule { }

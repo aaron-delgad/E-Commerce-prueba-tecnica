@@ -2,6 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import {CartService} from "../../shared/service/cart.service";
 import {Product} from "../../shared/model/base/product";
 import {FormGroup, FormControl, Validators} from "@angular/forms";
+import {MatDialog} from "@angular/material/dialog";
+import {ConfirmModalComponent} from "./components/confirm-modal/confirm-modal.component";
+import {Router} from "@angular/router";
+import {menuConst} from "../../setting/constants/menu.constant";
 
 @Component({
   selector: 'com-card-product',
@@ -20,7 +24,9 @@ export class CardProductComponent implements OnInit {
   cartProducts: any[] = [];
   form: FormGroup;
 
-  constructor(private readonly cartService: CartService) {  }
+  constructor(private readonly cartService: CartService,
+              public dialog: MatDialog,
+              private readonly router: Router,) {  }
 
   ngOnInit(): void {
     this.cartService.myCart$.subscribe(produ => {
@@ -56,7 +62,12 @@ export class CardProductComponent implements OnInit {
   }
 
   tobuy() {
-    
+    const dialog = this.dialog.open(ConfirmModalComponent, {
+      width: '400px', data: {state: 'Compra Realizada Satisfactoriamente'}
+    });
+    dialog.afterClosed().subscribe(result => {
+          this.router.navigate([menuConst.productList.fullPath]);
+    });
   }
 
   delete(productID: number) {
