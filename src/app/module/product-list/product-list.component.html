@@ -1,6 +1,6 @@
 
 <div class="row pt-4 mx-0">
-    <form class="offset-3 col-6 offset-sm-3 col-sm-6 offset-md-3 col-md-6 offset-lg-3 col-lg-6 offset-xl-3 col-xl-6 form">
+    <form class="col-12 col-sm-12 col-md-5 col-lg-5 offset-lg-3 col-xl-5 offset-xl-3 form">
       <mat-form-field class="w--100" appearance="outline">
         <input type="text" matInput [formControl]="searchField"
                placeholder="Ingrese el SKU del producto">
@@ -8,18 +8,19 @@
       </mat-form-field>
 
     </form>
-  <div class="mt-3 ml-5">
+  <div class="col-12 col-sm-12 col-md-3 col-lg-3 col-xl-3 mt-3 mb-5 ml-4">
     <input id="inputField" class="d-none" type="file" accept="image/*" capture (change)="scanQr()">
     <label for="inputField" class="scannerLabel bg--primary-light fw--500 fz--lg c--white px-4 py-3 br--1">Scanear</label>
-  </div>
+
 
   <a class="mt-3 ml-4" (click)="goCart()" matBadge="{{cartProduct.length}}" matBadgeColor="warn">
     <mat-icon >shopping_cart</mat-icon>
   </a>
+  </div>
 
 </div>
 <div class="row mx-0">
-  <div class="offset-3 col-5 offset-sm-3 col-sm-5 offset-md-3 col-md-5 offset-lg-3 col-lg-5 offset-xl-3 col-xl-5">
+  <div class="col-12 col-sm-12 col-md-5 offset-lg-3 col-lg-5 offset-xl-3 col-xl-5">
     <div class="w--100" id="reader"></div>
   </div>
 </div>
@@ -54,7 +55,7 @@
       </td>
     </ng-container>
 
-    <ng-container matColumnDef="carrito">
+    <ng-container matColumnDef="carrito" stickyEnd>
       <th class="w-col--min fz--lg c--primary px-2 c--white" mat-header-cell *matHeaderCellDef> carrito </th>
       <td class="py-3 px-3" mat-cell *matCellDef="let element">
         <button (click)="addCart(element)" mat-raised-button color="primary" matTooltip="Añadir al Carrito" matTooltipPosition="above">
