@@ -9,6 +9,8 @@ import {FormGroup, FormControl, Validators} from "@angular/forms";
   styleUrls: ['./card-product.component.scss']
 })
 export class CardProductComponent implements OnInit {
+  cantidad1: number =1;
+  cantidad = new FormControl(this.cantidad1, [Validators.required]);
 
 
   subtotal: number =0;
@@ -23,7 +25,6 @@ export class CardProductComponent implements OnInit {
   ngOnInit(): void {
     this.cartService.myCart$.subscribe(produ => {
       this.cartProducts = produ;
-      console.log(this.cartProducts);
       this.calcularTotal();
     });
   }
@@ -32,7 +33,6 @@ export class CardProductComponent implements OnInit {
     this.subtotal = this.cartProducts.reduce(function(totalActual, Product){
       return (Product.price * Product.cant) + totalActual;
     }, 0);
-    console.log(this.subtotal);
     this.total = this.subtotal + this.send;
     this.formBuild();
   }
@@ -40,7 +40,6 @@ export class CardProductComponent implements OnInit {
   formBuild(){
     this.form = new FormGroup({
       name: new FormControl('', [Validators.required]),
-      cantidad: new FormControl('1', [Validators.required]),
       subtotal: new FormControl(this.subtotal, [Validators.required]),
       send: new FormControl(this.send, [Validators.required]),
       total: new FormControl(this.total, [Validators.required])
@@ -50,14 +49,14 @@ export class CardProductComponent implements OnInit {
   calculateOrder(productID: number) {
     this.cartProducts = this.cartProducts.map(p =>
       p.sku === productID
-        ? { ...p, cant: this.form.value.cantidad }
+        ? { ...p, cant: this.cantidad.value }
         : p
     );
-  console.log(this.form.value.cantidad)
+    this.calcularTotal();
   }
 
   tobuy() {
-
+    
   }
 
   delete(productID: number) {
