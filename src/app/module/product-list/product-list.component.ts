@@ -3,6 +3,7 @@ import { BusinessService } from 'src/app/shared/service/business.service';
 import {MatTableDataSource} from "@angular/material/table";
 import {FormControl} from "@angular/forms";
 import {debounceTime } from 'rxjs/operators';
+import {Html5QrcodeScanner} from "html5-qrcode";
 
 @Component({
   selector: 'com-product-list',
