@@ -1,0 +1,87 @@
+//-------------------- Base Colors --------------------//
+/** primary **/
+$primary: #003a70;
+$primary-rgb: rgb(0, 58, 112);
+$primary-light: #42649f;
+$primary-dark: #001544;
+
+
+/** secondary **/
+$secondary: #E8531C;
+$secondary-rgb: rgb(232, 83, 28);
+$secondary-light: #ff854a;
+$secondary-dark: #ae1c00;
+
+/** tertiary **/
+$tertiary: #d81b60;
+$tertiary-rgb: rgb(216, 27, 96);
+$tertiary-light: #ff5c8d;
+$tertiary-dark: #a00037;
+
+/** success **/
+$success: #2dd36f;
+$success-rgb: rgb(45, 211, 111);
+$success-light: #6fff9f;
+$success-dark: #00a042;
+
+/** warning **/
+$warning: #ffc409;
+$warning-rgb: rgb(255, 196, 9);
+$warning-light: #fff652;
+$warning-dark: #c79400;
+
+/** danger **/
+$danger: #eb445a;
+$danger-rgb: rgb(235, 68, 90);
+$danger-light: #ff7987;
+$danger-dark: #b20031;
+
+/** white **/
+$white: #ffffff;
+$white-rgb: rgb(255, 255, 255);
+$white-light: #ffffff;
+$white-dark: #cccccc;
+
+/** light **/
+$light: #f4f5f8;
+$light-rgb: rgb(244, 245, 248);
+$light-light: #ffffff;
+$light-dark: #c1c2c5;
+
+/** medium **/
+$medium: #989aa2;
+$medium-rgb: rgb(152, 154, 162);
+$medium-light: #c9cbd3;
+$medium-dark: #6a6c73;
+
+/** dark **/
+$dark: #222428;
+$dark-rgb: rgb(34, 36, 40);
+$dark-light: #4a4c50;
+$dark-dark: #000000;
+
+/** font-size privacy and terms**/
+$fontSize: 20px;
+
+
+$size-xs: 10px;
+$size-sm: 12px;
+$size-md: 14px;
+$size-lg: 16px;
+$size-xl: 18px;
+$size-xxl: 24px;
+$size-xxxl: 44px;
+
+$size-0_5: 6px;
+$size-1: 12px;
+$size-2: 16px;
+$size-3: 24px;
+$size-4: 32px;
+$size-5: 48px;
+$size-6: 50%;
+
+$device-xl: 1200px;
+$device-lg: 1199px;
+$device-md: 991px;
+$device-sm: 767px;
+$device-xs: 575px;
