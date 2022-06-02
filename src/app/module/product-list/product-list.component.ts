@@ -16,11 +16,12 @@ export class ProductListComponent implements OnInit {
   searchField = new FormControl('');
   cameraId: any;
   html5QrCode: any;
+  cartProduct: Product[] = [];
 
   constructor(private readonly businessService: BusinessService) { }
 
   displayedColumns: string[] = ['name', 'sku', 'price', 'description','image', 'carrito'];
-  dataSource = new MatTableDataSource<any>();
+  dataSource = new MatTableDataSource<Product>();
 
   ngOnInit(): void {
       this.searchField.valueChanges
@@ -52,23 +53,20 @@ export class ProductListComponent implements OnInit {
             console.log(errorMessage);
           })
           .catch((err) => {
-            console.log(err);
           });
       }
     }).catch(err => {
-      console.log(err);
     });
   }
 
   stopScan() {
     this.html5QrCode.stop().then((ignore) => {
     }).catch((err) => {
-      console.log(err);
     });
   }
 
   addCart(product: Product) {
-    console.log(product)
+    this.cartProduct.push(product);
   }
 
 }
