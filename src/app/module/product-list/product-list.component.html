@@ -1,21 +1,26 @@
-<div class="row pt-4">
+
+<div class="row pt-4 mx-0">
     <form class="offset-3 col-6 offset-sm-3 col-sm-6 offset-md-3 col-md-6 offset-lg-3 col-lg-6 offset-xl-3 col-xl-6 form">
-      <mat-form-field class="field" appearance="outline">
+      <mat-form-field class="w--100" appearance="outline">
         <input type="text" matInput [formControl]="searchField"
                placeholder="Ingrese el SKU del producto">
         <mat-icon matSuffix>search</mat-icon>
       </mat-form-field>
+
     </form>
+  <div class="mt-3 ml-5">
+    <input id="inputField" class="d-none" type="file" accept="image/*" capture (change)="scanQr()">
+    <label for="inputField" class="scannerLabel bg--primary-light fw--500 fz--lg c--white px-4 py-3 br--1">Scanear</label>
+  </div>
+</div>
+<div class="row mx-0">
+  <div class="offset-3 col-5 offset-sm-3 col-sm-5 offset-md-3 col-md-5 offset-lg-3 col-lg-5 offset-xl-3 col-xl-5">
+    <div class="w--100" id="reader"></div>
+  </div>
 </div>
 
-<input type="file" id="qrInputFile1" accept="image/*" capture (change)="scanQr()">
-
-<div style="width: 500px" id="reader"></div>
-
-<button mat-flat-button color="primary" (click)="stopScan()">Primary</button>
-
 <div class="container mt-3 ">
-<table mat-table [dataSource]="dataSource">
+<table class="w--100" mat-table [dataSource]="dataSource">
 
     <ng-container matColumnDef="name">
       <th class="w-col--min fz--lg c--primary px-5 c--white" mat-header-cell *matHeaderCellDef> Nombre </th>
@@ -23,27 +28,38 @@
     </ng-container>
 
     <ng-container matColumnDef="sku">
-      <th class="w-col--min fz--lg c--primary px-5 c--white" mat-header-cell *matHeaderCellDef> SKU </th>
-      <td class="px-5 bg--light" mat-cell *matCellDef="let element"> {{element.sku}} </td>
+      <th class="w-col--min fz--lg c--primary px-3 c--white" mat-header-cell *matHeaderCellDef> SKU </th>
+      <td class="px-3 bg--light" mat-cell *matCellDef="let element"> {{element.sku}} </td>
     </ng-container>
 
     <ng-container matColumnDef="price">
-      <th class="w-col--min fz--lg c--primary px-5 c--white" mat-header-cell *matHeaderCellDef> Precio </th>
-      <td class="px-5" mat-cell *matCellDef="let element"> {{element.price}} </td>
+      <th class="w-col--min fz--lg c--primary px-2 c--white" mat-header-cell *matHeaderCellDef> Precio </th>
+      <td class="px-2" mat-cell *matCellDef="let element"> {{element.price}} </td>
     </ng-container>
 
     <ng-container matColumnDef="description">
-      <th class="w-col--min fz--lg c--primary px-5 c--white" mat-header-cell *matHeaderCellDef> Descripción </th>
-      <td class="px-5 text--justify bg--light" mat-cell *matCellDef="let element"> {{element.description}} </td>
+      <th class="w-col--min fz--lg c--primary px-3 c--white" mat-header-cell *matHeaderCellDef> Descripción </th>
+      <td class="px-3 text--justify bg--light" mat-cell *matCellDef="let element"> {{element.description}} </td>
     </ng-container>
-  <ng-container matColumnDef="image">
-    <th class="w-col--min fz--lg c--primary px-5 c--white" mat-header-cell *matHeaderCellDef> Imagen </th>
-    <td class="py-4 px-4" mat-cell *matCellDef="let element">
-      <img [src]="element.image" alt="img">
-    </td>
-  </ng-container>
+
+    <ng-container matColumnDef="image">
+      <th class="w-col--min fz--lg c--primary px-3 c--white" mat-header-cell *matHeaderCellDef> Imagen </th>
+      <td class="py-3 px-3" mat-cell *matCellDef="let element">
+        <img [src]="element.image" alt="img">
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="carrito">
+      <th class="w-col--min fz--lg c--primary px-2 c--white" mat-header-cell *matHeaderCellDef> carrito </th>
+      <td class="py-3 px-3" mat-cell *matCellDef="let element">
+        <button (click)="addCart(element)" mat-raised-button color="primary" matTooltip="Añadir al Carrito" matTooltipPosition="above">
+          <mat-icon>add_shopping_cart</mat-icon>
+        </button>
+      </td>
+    </ng-container>
 
     <tr class="bg--primary-light" mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
   </table>
 </div>
+

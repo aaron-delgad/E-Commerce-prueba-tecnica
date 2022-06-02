@@ -10,7 +10,7 @@ import {ReactiveFormsModule} from '@angular/forms';
 import {MatInputModule} from '@angular/material/input';
 import {MatCardModule} from '@angular/material/card';
 import {MatFormFieldModule} from '@angular/material/form-field';
-
+import {MatTooltipModule} from '@angular/material/tooltip';
 
 @NgModule({
   declarations: [
@@ -28,6 +28,7 @@ import {MatFormFieldModule} from '@angular/material/form-field';
     MatInputModule,
     MatCardModule,
     MatFormFieldModule,
+    MatTooltipModule
   ]
 })
 export class ProductListModule { }
