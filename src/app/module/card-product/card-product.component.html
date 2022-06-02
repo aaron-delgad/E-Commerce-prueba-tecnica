@@ -4,26 +4,34 @@
 
   <div class="row">
     <div class="col-8 col-sm-8 col-md-8 col-lg-8 col-xl-8">
-      <div class="row">
-      <mat-selection-list #shoes [multiple]="false">
-        <mat-list-option *ngFor="let cartProduct of cartProducts" [value]="cartProduct.id">
+
+      <mat-list class="row">
+        <mat-list-item *ngFor="let cartProduct of cartProducts" >
           <mat-divider></mat-divider>
 
-            <div class="col-4 col-sm-4 col-md-4 col-lg-4 col-xl-4">
-              {{cartProduct.image}}
+            <div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3">
+              <div mat-line><img class="br--6" style="width: 70px; height: 90px" [src]="cartProduct.image" alt="fondo"></div>
             </div>
-            <div class="col-8 col-sm-8 col-md-8 col-lg-8 col-xl-8">
-              {{cartProduct.name}}
+            <div class="col-9 col-sm-9 col-md-9 col-lg-9 col-xl-9">
+              <div class="mt-3 c--primary" mat-line>{{cartProduct.name}}</div>
+              <div class="mt-3 c--warning fz--xl" mat-line>{{cartProduct.price}}</div>
+              <div class="mt-3 c--primary" mat-line>{{cartProduct.description}}</div>
+              <div class="mt-3" mat-line><mat-form-field appearance="outline">
+                <mat-label>N° Unidades</mat-label>
+                <input [formControl]="cantidad" type="number" matInput >
+              </mat-form-field></div>
+              <div class="mt-3" mat-line>
+                <button mat-stroked-button color="primary">Eliminar</button>
+              </div>
             </div>
 
+        </mat-list-item>
 
-        </mat-list-option>
-      </mat-selection-list>
-      </div>
+      </mat-list>
+
     </div>
     <div class="col-4 col-sm-4 col-md-4 col-lg-4 col-xl-4">
-
-
+      
       <mat-card class="px-5 py-5">
         <mat-card-header>
           <mat-card-title class="c--warning fz--xxl">Resumen de Pedido</mat-card-title>
